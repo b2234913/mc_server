@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  mc:
+    image: itzg/minecraft-server
+    ports:
+    # expose the Minecraft server port outside of container
+    - 25565:25565
+    environment:
+      # REQUIRED for all types
+      EULA: "TRUE"
+      # Set server type (vs the default of vanilla)
+      TYPE: FORGE
+      ONLINE_MODE: "FALSE"
+      VERSION: "1.15.2"
+      FORGEVERSION: "31.1.50"
+      SEED: "-2031748898323667377"
+      PVP: "false"
+      OPS: "Shooter"
+      ICON: "https://i.imgur.com/0YiuUsL.jpg"
+      MOTD: "This is Durian's world!"
+      SPAWN_PROTECTION: 0
+    volumes:
+    # use a named, managed volume for data volume
+    - mc_forge:/data
+    # attach local host directory "mods" in same directory as this compose file
+    # all mods in this directory get copied into /data/mods at startup
+    - $PWD/mods:/mods:ro
+    - $PWD/world:/world:ro
+      #- $PWD/worlds:/worlds:ro
+
+    dns: 8.8.8.8
+volumes:
+  # declared the named volume, but use default/local storage engine
+  mc_forge: {}
