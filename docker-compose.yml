@@ -29,7 +29,8 @@ services:
     - $PWD/world:/world:ro
       #- $PWD/worlds:/worlds:ro
 
-    dns: 8.8.8.8
+    dns: 8.8.8.8 
+    #d adasdas
 volumes:
   # declared the named volume, but use default/local storage engine
   mc_forge: {}
